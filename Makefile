@@ -9,18 +9,3 @@ dropdb:
 
 migrateup:
 	npx prisma migrate dev --name init
-
-migratedown:
-	migrate -path db/migration --database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose  down
-
-sqlc:
-	docker run --rm -v "${CURDIR}":/src -w /src kjconroy/sqlc generate
-
-test:
-	go test -v -cover ./...
-
-server:
-	go run main.go
-
-mock:
-	mockgen --package mockdb  --destination db/mock/store.go --source=./db/sqlc/store.go Store

@@ -1,3 +1,6 @@
+-- Create Schema
+CREATE SCHEMA IF NOT EXISTS bikes_data;
+
 -- CreateTable
 CREATE TABLE "Bike" (
     "kioskId" INTEGER NOT NULL,

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    command: >
+      bash -c "./wait-for-it.sh postgres:5432 && npm run migrate:init && node dist/main.js"
+
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      BIKES_API: ${BIKES_API}
+      WEATHER_API: ${WEATHER_API}
+      ACCESS_TOKEN: ${ACCESS_TOKEN}
+
+volumes:
+  db:
