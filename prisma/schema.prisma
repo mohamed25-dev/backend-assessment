@@ -20,6 +20,8 @@ model Bike {
 
   // Defining the unique constraint
   @@id([kioskId, createdAtHour])
+  //indexes, kioskId will use the previous index
+  @@index([createdAt, kioskId])
 }
 
 model Weather {
@@ -31,4 +33,6 @@ model Weather {
 
   // Defining the unique constraint
   @@id([cityId, createdAtHour])
+  //indexes, cityId will use the previous index
+  @@index([createdAt, cityId])
 }

@@ -165,7 +165,7 @@ export interface StationData {
     type: string
 }
 
-interface Bike {
+export interface Bike {
     battery: number,
     dockNumber: number,
     isElectric: boolean,
