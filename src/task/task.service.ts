@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { BikeService } from '../bike/bike.service';
 import { WeatherService } from '../weather/weather.service';
 
@@ -10,17 +10,17 @@ export class TaskService {
     constructor(
         private weatherService: WeatherService,
         private bikeService: BikeService,
-    ){}
+    ) { }
 
-    // @Cron('45 * * * * *')
-    // async getWeatherData () {
-    //     await this.weatherService.getWeatherDataFromApi();
-    //     this.logger.log('Done Updating weather data');
-    // }
+    @Cron(CronExpression.EVERY_HOUR)
+    async getWeatherData() {
+        await this.weatherService.fetchWeatherDataFromApi();
+        this.logger.log('Done Updating weather data');
+    }
 
-    // @Cron('45 * * * * *')
-    // async getBikesData () {
-    //     await this.bikeService.getBikeDataFromApi();
-    //     this.logger.log('Done Updating bikes data');
-    // }
+    @Cron(CronExpression.EVERY_HOUR)
+    async getBikesData() {
+        await this.bikeService.fetchBikeDataFromApi();
+        this.logger.log('Done Updating bikes data');
+    }
 }
