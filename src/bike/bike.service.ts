@@ -3,7 +3,8 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { PrismaService } from '../prisma/prisma.service';
-import { WeatherResponse, WeatherService } from '../weather/weather.service';
+import { WeatherService } from '../weather/weather.service';
+import { AccumulatedDataDTO, IndegoResponse, StationData, StationsDbModel } from './dtos/bike.dto';
 
 @Injectable()
 export class BikeService {
@@ -103,71 +104,4 @@ export class BikeService {
             weather: weatherData || null
         };
     }
-}
-
-export class AccumulatedDataDTO {
-    at: Date;
-    weather: WeatherResponse;
-    station: IndegoResponse;
-}
-
-export interface StationsDbModel {
-    kioskId: number,
-    data: any,
-    type: string,
-    createdAt: Date,
-    createdAtHour: Date
-}
-
-export interface IndegoResponse {
-    last_updated: Date,
-    features: StationData[],
-    type: string
-}
-
-export interface StationData {
-    geometry: { coordinates: number[], type: string },
-    properties: {
-        id: number,
-        name: string,
-        coordinates: number[],
-        totalDocks: number,
-        docksAvailable: number,
-        bikesAvailable: number,
-        classicBikesAvailable: number,
-        smartBikesAvailable: number,
-        electricBikesAvailable: number,
-        rewardBikesAvailable: number,
-        rewardDocksAvailable: number,
-        kioskStatus: string,
-        kioskPublicStatus: string,
-        kioskConnectionStatus: string,
-        kioskType: number,
-        addressStreet: string,
-        addressCity: string,
-        addressState: string,
-        addressZipCode: string,
-        bikes: Bike[],
-        closeTime: Date,
-        eventEnd: Date,
-        eventStart: Date,
-        isEventBased: boolean,
-        isVirtual: boolean,
-        kioskId: number,
-        notes: string,
-        openTime: Date,
-        publicText: string,
-        timeZone: number,
-        trikesAvailable: number,
-        latitude: number,
-        longitude: number
-    },
-    type: string
-}
-
-export interface Bike {
-    battery: number,
-    dockNumber: number,
-    isElectric: boolean,
-    isAvailable: boolean
 }

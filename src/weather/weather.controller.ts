@@ -1,7 +1,9 @@
 import { Controller, Post, HttpCode } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { WeatherService } from './weather.service';
 
 @Controller('weather')
+@ApiTags('WeatherController')
 export class WeatherController {
     constructor(
         private bikesService: WeatherService
