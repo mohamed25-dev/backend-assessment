@@ -19,11 +19,14 @@ Run the following command to start the app using Docker Compose:
 
 ### Available APIs
 
+Please note that all APIs are secured with an ``` ACCESS_TOKEN ``` specified in the environment variable. To access these APIs, you must provide the token in the Authorization header.
+
 #### Download Stations Data API:
 
 ```POST /api/v1/indego-data-fetch-and-store-it-db```
 
-Description: Downloads station data from Indego servers and saves it to the database.
+Description: Downloads station data from Indego servers and saves it to the database, however, note that there are two scheduled jobs that have been set up to run every hour. 
+These jobs fetch data from the Indego and Open Weather APIs, storing it in the database. So the API's are a convinent alternative.
 
 #### Download Weather Data API:
 
