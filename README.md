@@ -54,5 +54,5 @@ Description: a web page that shows API's documentation.
 
 ## Notes:
 For database design, I've chosen to store the API's retrieved data in a JSON column. 
-Since we  query the data and no updates are done on these fields suits well. 
+Since we  query the data and no updates are done on these fields JSON suits well. 
 I've added dedicated columns indexed for querying criteria – like station id and dates for bike data. to improve querying efficiency.
