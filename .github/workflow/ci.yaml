@@ -1,0 +1,31 @@
+name: Run Tests on PR
+
+on:
+  pull_request:
+    branches:
+      - master 
+      - feature/github-actions
+    types:
+      - opened
+      - synchronize
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run uint tests
+        run: npm test
+
+      - name: Run e2e tests
+        run: npm run test:e2e
