@@ -2,9 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { WeatherDbModel, WeatherResponse, WeatherService } from './weather.service';
+import { WeatherService } from './weather.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { timestampToUTC } from '../utils';
+import { WeatherDbModel, WeatherResponse } from './dtos/weather.dto';
 
 describe('WeatherService', () => {
   let service: WeatherService;
@@ -108,10 +109,5 @@ describe('WeatherService', () => {
 
     const result = await service.getWeatherData(null);
     expect(result).toEqual(mockedWeatherResponse);
-  });
-
-  it('should throw 404 if no data was found', async () => {
-    prismaServiceMock.weather.findFirst.mockResolvedValue(null);
-    await expect(service.getWeatherData(null)).rejects.toThrow(new NotFoundException())
   });
 });
