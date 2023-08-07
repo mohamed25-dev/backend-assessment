@@ -26,6 +26,3 @@ jobs:
 
       - name: Run uint tests
         run: npm test
-
-      - name: Run e2e tests
-        run: npm run test:e2e

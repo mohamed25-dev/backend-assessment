@@ -2,9 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { AccumulatedDataDTO, BikeService, IndegoResponse, StationsDbModel } from './bike.service';
+import { BikeService } from './bike.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { WeatherResponse, WeatherService } from '../weather/weather.service';
+import { WeatherService } from '../weather/weather.service';
+import { AccumulatedDataDTO, IndegoResponse, StationsDbModel } from './dtos/bike.dto';
+import { WeatherResponse } from '../weather/dtos/weather.dto';
 
 describe('BikeService', () => {
   let service: BikeService;
