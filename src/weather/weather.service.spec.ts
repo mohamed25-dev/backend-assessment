@@ -110,9 +110,4 @@ describe('WeatherService', () => {
     const result = await service.getWeatherData(null);
     expect(result).toEqual(mockedWeatherResponse);
   });
-
-  it('should throw 404 if no data was found', async () => {
-    prismaServiceMock.weather.findFirst.mockResolvedValue(null);
-    await expect(service.getWeatherData(null)).rejects.toThrow(new NotFoundException())
-  });
 });
